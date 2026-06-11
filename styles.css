@@ -5,7 +5,9 @@
 html, body {
   width: 100%; height: 100%;
   overflow: hidden;
-  background: #000;
+  background:
+    radial-gradient(circle at 75% 12%, rgba(218, 184, 126, 0.16), transparent 32rem),
+    linear-gradient(145deg, #0e1418, #18252f 48%, #090d10);
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   -webkit-user-select: none;
   user-select: none;
@@ -27,30 +29,32 @@ canvas {
   display: grid;
   place-items: center;
   z-index: 15;
-  background: rgba(0,0,0,0.35);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: rgba(8,11,10,0.32);
+  backdrop-filter: blur(9px) saturate(0.9);
+  -webkit-backdrop-filter: blur(9px) saturate(0.9);
   animation: fadeIn 0.25s ease;
 }
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 .panel {
-  background: linear-gradient(145deg, rgba(30,41,59,0.93), rgba(15,23,42,0.96));
-  border: 1px solid rgba(255,255,255,0.08);
+  background:
+    linear-gradient(145deg, rgba(48,39,28,0.92), rgba(15,19,19,0.96)),
+    radial-gradient(circle at 30% 10%, rgba(236,205,150,0.18), transparent 12rem);
+  border: 1px solid rgba(236,205,150,0.14);
   border-radius: 22px;
   padding: 36px 30px;
   max-width: 360px;
   width: 88%;
   text-align: center;
-  box-shadow: 0 24px 64px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.04) inset;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.58), 0 0 0 1px rgba(255,245,215,0.05) inset;
 }
 
 .game-title {
   font-size: 2.4rem;
   font-weight: 800;
   letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #fbbf24 20%, #f59e0b 50%, #fbbf24 80%);
+  background: linear-gradient(135deg, #f5dfac 20%, #b88d50 50%, #ead7a5 80%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -62,7 +66,7 @@ canvas {
 
 .tagline {
   font-size: 0.9rem;
-  color: #94a3b8;
+  color: #b8b0a1;
   margin: 4px 0 24px;
 }
 
@@ -102,21 +106,21 @@ h2 {
   font-family: inherit;
 }
 .btn-primary {
-  background: linear-gradient(135deg, #fbbf24, #f59e0b);
-  color: #1c1917;
-  box-shadow: 0 4px 16px rgba(251,191,36,0.3);
+  background: linear-gradient(135deg, #e3c17b, #9d7440);
+  color: #1b140d;
+  box-shadow: 0 4px 16px rgba(179,130,68,0.28);
 }
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(251,191,36,0.4);
+  box-shadow: 0 8px 24px rgba(179,130,68,0.36);
 }
 .btn-secondary {
-  background: rgba(255,255,255,0.07);
-  color: rgba(255,255,255,0.85);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(245,225,186,0.07);
+  color: rgba(243,235,219,0.86);
+  border: 1px solid rgba(236,205,150,0.13);
 }
 .btn-secondary:hover {
-  background: rgba(255,255,255,0.12);
+  background: rgba(245,225,186,0.13);
 }
 .btn:active { transform: translateY(0); }
 
@@ -141,16 +145,16 @@ h2 {
 }
 .bird-card:hover { background: rgba(255,255,255,0.08); }
 .bird-card.selected {
-  border-color: #fbbf24;
-  background: rgba(251,191,36,0.08);
-  box-shadow: 0 0 16px rgba(251,191,36,0.15);
+  border-color: #d6b675;
+  background: rgba(214,182,117,0.1);
+  box-shadow: 0 0 16px rgba(214,182,117,0.14);
 }
 .bird-card span {
   font-size: 0.78rem;
   font-weight: 600;
   color: rgba(255,255,255,0.7);
 }
-.bird-card.selected span { color: #fbbf24; }
+.bird-card.selected span { color: #e3c17b; }
 .bird-dot {
   width: 48px; height: 48px;
   border-radius: 50%;
@@ -198,7 +202,7 @@ h2 {
   transition: transform 0.2s;
   box-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
-.toggle input:checked + .slider { background: #fbbf24; }
+.toggle input:checked + .slider { background: #c59a59; }
 .toggle input:checked + .slider::before { transform: translateX(20px); }
 
 /* Difficulty buttons */
@@ -220,9 +224,9 @@ h2 {
 }
 .diff-btn:hover { background: rgba(255,255,255,0.1); }
 .diff-btn.active {
-  background: #fbbf24;
+  background: #c59a59;
   color: #1c1917;
-  border-color: #fbbf24;
+  border-color: #c59a59;
 }
 
 /* ── In-game HUD ─────────────────────────────── */
@@ -233,8 +237,8 @@ h2 {
   justify-content: space-between;
   align-items: center;
   padding: 10px 28px 14px;
-  background: linear-gradient(transparent, rgba(0,0,0,0.5));
-  color: rgba(255,255,255,0.75);
+  background: linear-gradient(transparent, rgba(8,10,9,0.6));
+  color: rgba(238,226,205,0.78);
   font-size: 14px;
   pointer-events: none;
   z-index: 10;
