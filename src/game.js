@@ -1022,12 +1022,12 @@ function drawVignette() {
 
   ctx.save();
   ctx.globalCompositeOperation = "screen";
-  const flare = ctx.createLinearGradient(270, 72, WORLD.width, 190);
-  flare.addColorStop(0, "rgba(255, 232, 180, 0.18)");
-  flare.addColorStop(0.38, "rgba(255, 202, 124, 0.06)");
+  const flare = ctx.createRadialGradient(315, 118, 4, 315, 118, 165);
+  flare.addColorStop(0, "rgba(255, 232, 180, 0.2)");
+  flare.addColorStop(0.34, "rgba(255, 202, 124, 0.08)");
   flare.addColorStop(1, "rgba(255, 255, 255, 0)");
   ctx.fillStyle = flare;
-  ctx.fillRect(230, 60, 190, 170);
+  ctx.fillRect(0, 0, WORLD.width, WORLD.height);
   ctx.restore();
 }
 
