@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Flappy Bird</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="game" aria-label="Flappy Bird game"></canvas>
+
+  <!-- Main Menu -->
+  <div id="menu-screen" class="screen">
+    <div class="panel menu-content">
+      <h1 class="game-title">Flappy Bird</h1>
+      <p class="tagline">How far can you fly?</p>
+      <div class="menu-btns">
+        <button id="btn-play" class="btn btn-primary">Play</button>
+        <button id="btn-birds" class="btn btn-secondary">Choose Bird</button>
+        <button id="btn-settings" class="btn btn-secondary">Settings</button>
+      </div>
+      <div class="menu-best" id="menu-best-wrap" hidden>
+        Best Score: <strong id="menu-best">0</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bird Selection -->
+  <div id="bird-screen" class="screen" hidden>
+    <div class="panel">
+      <h2>Choose Your Bird</h2>
+      <div id="bird-grid" class="bird-grid"></div>
+      <button id="btn-birds-back" class="btn btn-secondary">Back</button>
+    </div>
+  </div>
+
+  <!-- Settings -->
+  <div id="settings-screen" class="screen" hidden>
+    <div class="panel">
+      <h2>Settings</h2>
+      <div class="settings-list">
+        <div class="setting-row">
+          <span>Sound Effects</span>
+          <label class="toggle"><input type="checkbox" id="set-sound" checked><span class="slider"></span></label>
+        </div>
+        <div class="setting-row">
+          <span>Music</span>
+          <label class="toggle"><input type="checkbox" id="set-music" checked><span class="slider"></span></label>
+        </div>
+        <div class="setting-row">
+          <span>Difficulty</span>
+          <div class="difficulty-btns">
+            <button class="diff-btn" data-diff="easy">Easy</button>
+            <button class="diff-btn active" data-diff="normal">Normal</button>
+            <button class="diff-btn" data-diff="hard">Hard</button>
+          </div>
+        </div>
+      </div>
+      <button id="btn-settings-back" class="btn btn-secondary">Back</button>
+    </div>
+  </div>
+
+  <!-- In-game HUD -->
+  <div id="hud" hidden aria-live="polite">
+    <span id="status"></span>
+    <span>Score: <strong id="score">0</strong></span>
+    <span>Best: <strong id="best-score">0</strong></span>
+    <button id="mute" type="button" aria-label="Toggle sound">🔊</button>
+  </div>
+
+  <!-- Game over buttons -->
+  <div id="gameover-btns" hidden>
+    <button id="restart" class="btn btn-primary">Play Again</button>
+    <button id="btn-to-menu" class="btn btn-secondary">Menu</button>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
