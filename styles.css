@@ -1,0 +1,275 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+[hidden] { display: none !important; }
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 75% 12%, rgba(218, 184, 126, 0.16), transparent 32rem),
+    linear-gradient(145deg, #0e1418, #18252f 48%, #090d10);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-user-select: none;
+  user-select: none;
+  color: #e2e8f0;
+}
+
+canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  cursor: pointer;
+  touch-action: none;
+}
+
+/* ── Screens (menu overlays) ─────────────────── */
+.screen {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 15;
+  background: rgba(8,11,10,0.32);
+  backdrop-filter: blur(9px) saturate(0.9);
+  -webkit-backdrop-filter: blur(9px) saturate(0.9);
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.panel {
+  background:
+    linear-gradient(145deg, rgba(48,39,28,0.92), rgba(15,19,19,0.96)),
+    radial-gradient(circle at 30% 10%, rgba(236,205,150,0.18), transparent 12rem);
+  border: 1px solid rgba(236,205,150,0.14);
+  border-radius: 22px;
+  padding: 36px 30px;
+  max-width: 360px;
+  width: 88%;
+  text-align: center;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.58), 0 0 0 1px rgba(255,245,215,0.05) inset;
+}
+
+.game-title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #f5dfac 20%, #b88d50 50%, #ead7a5 80%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer { to { background-position: 200% center; } }
+
+.tagline {
+  font-size: 0.9rem;
+  color: #b8b0a1;
+  margin: 4px 0 24px;
+}
+
+.menu-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-best {
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+.menu-best strong {
+  color: #fbbf24;
+}
+
+h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #f1f5f9;
+}
+
+/* ── Buttons ─────────────────────────────────── */
+.btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+  font-family: inherit;
+}
+.btn-primary {
+  background: linear-gradient(135deg, #e3c17b, #9d7440);
+  color: #1b140d;
+  box-shadow: 0 4px 16px rgba(179,130,68,0.28);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(179,130,68,0.36);
+}
+.btn-secondary {
+  background: rgba(245,225,186,0.07);
+  color: rgba(243,235,219,0.86);
+  border: 1px solid rgba(236,205,150,0.13);
+}
+.btn-secondary:hover {
+  background: rgba(245,225,186,0.13);
+}
+.btn:active { transform: translateY(0); }
+
+/* ── Bird grid ───────────────────────────────── */
+.bird-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 12px 0 20px;
+}
+.bird-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 6px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.04);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.bird-card:hover { background: rgba(255,255,255,0.08); }
+.bird-card.selected {
+  border-color: #d6b675;
+  background: rgba(214,182,117,0.1);
+  box-shadow: 0 0 16px rgba(214,182,117,0.14);
+}
+.bird-card span {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+}
+.bird-card.selected span { color: #e3c17b; }
+.bird-dot {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35), 0 0 0 2px rgba(255,255,255,0.06) inset;
+}
+
+/* ── Settings ────────────────────────────────── */
+.settings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 8px 0 20px;
+  text-align: left;
+}
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.92rem;
+}
+
+/* Toggle switch */
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 46px; height: 26px;
+  flex-shrink: 0;
+}
+.toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+.toggle .slider {
+  position: absolute; inset: 0;
+  background: #374151;
+  border-radius: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.toggle .slider::before {
+  content: "";
+  position: absolute;
+  width: 20px; height: 20px;
+  left: 3px; bottom: 3px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+.toggle input:checked + .slider { background: #c59a59; }
+.toggle input:checked + .slider::before { transform: translateX(20px); }
+
+/* Difficulty buttons */
+.difficulty-btns {
+  display: flex;
+  gap: 4px;
+}
+.diff-btn {
+  padding: 6px 13px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.65);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.diff-btn:hover { background: rgba(255,255,255,0.1); }
+.diff-btn.active {
+  background: #c59a59;
+  color: #1c1917;
+  border-color: #c59a59;
+}
+
+/* ── In-game HUD ─────────────────────────────── */
+#hud {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 28px 14px;
+  background: linear-gradient(transparent, rgba(8,10,9,0.6));
+  color: rgba(238,226,205,0.78);
+  font-size: 14px;
+  pointer-events: none;
+  z-index: 10;
+}
+#hud strong {
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+#mute {
+  pointer-events: auto;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  opacity: 0.6;
+  padding: 4px;
+  transition: opacity 0.15s;
+}
+#mute:hover { opacity: 1; }
+
+/* ── Game over buttons ───────────────────────── */
+#gameover-btns {
+  position: fixed;
+  left: 50%;
+  bottom: 48px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 220px;
+  z-index: 20;
+  animation: fadeIn 0.3s ease;
+}
+#gameover-btns .btn { text-align: center; }
