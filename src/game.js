@@ -1051,25 +1051,27 @@ function drawOverlay() {
       : state === "paused"
         ? "Press Esc or tap to continue."
         : "Tap again for another run.";
+  const panelY = state === "ready" ? WORLD.height - WORLD.ground - 136 : WORLD.height * 0.3;
+  const panelHeight = state === "ready" ? 112 : state === "gameover" ? 178 : 150;
 
   ctx.save();
-  ctx.fillStyle = "rgba(5, 12, 18, 0.42)";
+  ctx.fillStyle = state === "ready" ? "rgba(5, 12, 18, 0.16)" : "rgba(5, 12, 18, 0.42)";
   ctx.fillRect(0, 0, WORLD.width, WORLD.height);
 
-  drawGlassPanel(WORLD.width / 2 - 150, WORLD.height * 0.3, 300, state === "gameover" ? 178 : 150);
+  drawGlassPanel(WORLD.width / 2 - 150, panelY, 300, panelHeight);
   ctx.textAlign = "center";
   ctx.fillStyle = "#fffaf0";
-  ctx.font = "800 30px Inter, system-ui, sans-serif";
-  ctx.fillText(title, WORLD.width / 2, WORLD.height * 0.3 + 52);
+  ctx.font = state === "ready" ? "800 26px Inter, system-ui, sans-serif" : "800 30px Inter, system-ui, sans-serif";
+  ctx.fillText(title, WORLD.width / 2, panelY + 42);
 
   ctx.fillStyle = "rgba(255, 250, 240, 0.78)";
   ctx.font = "600 14px Inter, system-ui, sans-serif";
-  wrapText(subtitle, WORLD.width / 2, WORLD.height * 0.3 + 84, 240, 20);
+  wrapText(subtitle, WORLD.width / 2, panelY + 70, 240, 20);
 
   if (state === "gameover") {
     ctx.fillStyle = "#ffd36a";
     ctx.font = "900 42px Inter, system-ui, sans-serif";
-    ctx.fillText(String(score), WORLD.width / 2, WORLD.height * 0.3 + 142);
+    ctx.fillText(String(score), WORLD.width / 2, panelY + 142);
   }
 
   ctx.restore();
