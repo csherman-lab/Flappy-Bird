@@ -6,6 +6,32 @@
   padding: 0;
 }
 
+#file-warning {
+  max-width: 640px;
+  margin: 4rem auto;
+  padding: 2rem;
+  font-family: system-ui, sans-serif;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  line-height: 1.6;
+}
+
+#file-warning h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+#file-warning ol {
+  margin: 1rem 0 0 1.25rem;
+}
+
+#file-warning code {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+}
+
 html,
 body {
   width: 100%;

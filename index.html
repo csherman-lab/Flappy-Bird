@@ -10,6 +10,15 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+  <div id="file-warning" hidden>
+    <h1>Flappy Bird 3D — setup required</h1>
+    <p>This game cannot run by double-clicking the HTML file. You need a local web server.</p>
+    <ol>
+      <li>Open a terminal in this project folder</li>
+      <li>Run: <code>./start.sh</code> or <code>python3 -m http.server 8080</code></li>
+      <li>Open <code>http://localhost:8080</code> in your browser</li>
+    </ol>
+  </div>
   <div id="app">
     <canvas id="game-canvas"></canvas>
 
@@ -31,6 +40,12 @@
     </div>
   </div>
 
+  <script>
+    if (location.protocol === 'file:') {
+      document.getElementById('file-warning').hidden = false;
+      document.getElementById('app').style.display = 'none';
+    }
+  </script>
   <script type="importmap">
   {
     "imports": {

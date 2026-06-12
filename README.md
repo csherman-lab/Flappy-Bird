@@ -1,26 +1,87 @@
 # Flappy Bird 3D
 
-A realistic 3D reimagining of the original Flappy Bird mobile game, built with Three.js. The classic cyan sky, green pipes, yellow bird, and pixel-art UI colors are preserved — but the world is fully 3D with lighting, shadows, and depth.
+A realistic 3D version of Flappy Bird (Three.js), keeping the original cyan sky, green pipes, and yellow bird.
 
-## Play locally
+---
+
+## Step-by-step: how to run
+
+### Step 1 — Get the code
+
+Open a terminal and run:
+
+```bash
+git clone https://github.com/csherman-lab/Flappy-Bird.git
+cd Flappy-Bird
+```
+
+### Step 2 — Switch to the game branch
+
+The game is on this branch (not `main`):
+
+```bash
+git checkout cursor/realistic-3d-flappy-bird-d4fe
+```
+
+Check that you have the game files:
+
+```bash
+ls
+```
+
+You should see `index.html`, `js/`, `css/`, and `assets/`.
+
+### Step 3 — Start a local web server
+
+**Option A (easiest):**
+
+```bash
+chmod +x start.sh
+./start.sh
+```
+
+**Option B (Python):**
 
 ```bash
 python3 -m http.server 8080
 ```
 
-Open [http://localhost:8080](http://localhost:8080) in your browser.
+**Option C (Node):**
+
+```bash
+npm start
+```
+
+You should see something like: `Serving HTTP on ... port 8080`
+
+### Step 4 — Open in your browser
+
+Go to:
+
+**http://localhost:8080**
+
+Do **not** double-click `index.html`. That will not work.
+
+### Step 5 — Play
+
+- Click the screen, tap (mobile), or press **Space** / **↑** to flap
+- Avoid the green pipes
+- Tap again after game over to retry
+
+---
+
+## Troubleshooting
+
+| Problem | Fix |
+|---------|-----|
+| Blank page / only "Flappy-Bird" text | You are on `main`. Run `git checkout cursor/realistic-3d-flappy-bird-d4fe` |
+| "Setup required" message | You opened the file directly. Use a server (Step 3) and visit `http://localhost:8080` |
+| `index.html not found` | `cd` into the project folder first |
+| Port 8080 in use | Use another port: `python3 -m http.server 3000` then open `http://localhost:3000` |
+
+---
 
 ## Controls
 
 - **Click / Tap** — flap
 - **Space / Up Arrow** — flap
-
-## Features
-
-- Faithful OG color palette (`#4EC0CA` sky, `#73BF2E` pipes, `#F7DC16` bird)
-- 3D bird with animated wings, beak, and tail feathers
-- Cylindrical pipes with rim caps and highlight stripes
-- Scrolling grass/dirt ground with procedural textures
-- Parallax clouds and distant city skyline
-- Real-time shadows and PBR-style materials
-- Score tracking with local best score
