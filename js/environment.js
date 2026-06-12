@@ -202,6 +202,36 @@ export class Environment {
 
     this.grassTex = grassTex;
     this.dirtTex = dirtTex;
+    this._buildGrassBlades();
+  }
+
+  _buildGrassBlades() {
+    const bladeGeo = new THREE.PlaneGeometry(0.08, 0.35);
+    const bladeMat = new THREE.MeshStandardMaterial({
+      color: COLORS.grassDark,
+      roughness: 0.9,
+      metalness: 0,
+      side: THREE.DoubleSide,
+    });
+    const count = 180;
+    const blades = new THREE.InstancedMesh(bladeGeo, bladeMat, count);
+    const dummy = new THREE.Object3D();
+    for (let i = 0; i < count; i++) {
+      dummy.position.set(
+        -40 + Math.random() * 80,
+        GAME.groundY + 0.38,
+        -2 + Math.random() * 4
+      );
+      dummy.rotation.y = Math.random() * Math.PI;
+      dummy.rotation.z = (Math.random() - 0.5) * 0.4;
+      dummy.scale.setScalar(0.6 + Math.random() * 0.8);
+      dummy.updateMatrix();
+      blades.setMatrixAt(i, dummy.matrix);
+    }
+    blades.instanceMatrix.needsUpdate = true;
+    blades.castShadow = true;
+    this.grassBlades = blades;
+    this.groundGroup.add(blades);
   }
 
   _buildClouds() {

@@ -56,6 +56,100 @@ body {
   cursor: pointer;
 }
 
+#get-ready {
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(1rem, 4vw, 1.6rem);
+  color: #ffffff;
+  text-shadow: 4px 4px 0 #e8982d;
+  z-index: 4;
+  pointer-events: none;
+  animation: getReadyPop 0.5s ease-out;
+}
+
+@keyframes getReadyPop {
+  0% { opacity: 0; transform: translateX(-50%) scale(1.4); }
+  100% { opacity: 1; transform: translateX(-50%) scale(1); }
+}
+
+#screen-flash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.05s ease-out;
+}
+
+#screen-flash.active {
+  opacity: 1;
+}
+
+#mute-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 6;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.25);
+  font-size: 1.2rem;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s;
+}
+
+#mute-btn:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+#mute-btn.muted {
+  opacity: 0.6;
+}
+
+#medal {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#medal-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.medal-bronze #medal-icon {
+  background: radial-gradient(circle at 35% 35%, #e8a050, #cd7f32 60%, #8b5a2b);
+}
+
+.medal-silver #medal-icon {
+  background: radial-gradient(circle at 35% 35%, #f0f0f0, #c0c0c0 60%, #808080);
+}
+
+.medal-gold #medal-icon {
+  background: radial-gradient(circle at 35% 35%, #fff0a0, #f7dc16 60%, #c4a800);
+}
+
+.medal-platinum #medal-icon {
+  background: radial-gradient(circle at 35% 35%, #ffffff, #b8d8f0 50%, #6a9ab8);
+}
+
+#medal-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(0.45rem, 1.8vw, 0.55rem);
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
 #hud {
   position: absolute;
   top: 0;

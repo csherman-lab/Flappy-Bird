@@ -2,6 +2,14 @@
 
 A realistic 3D version of Flappy Bird (Three.js), keeping the original cyan sky, green pipes, and yellow bird.
 
+## What's in the game
+
+- 3D bird with flapping wings, blinking eye, and feather particles
+- Procedural sound (flap, score ding, crash) — press **M** or tap 🔊 to mute
+- OG-style medals: Bronze (10+), Silver (20+), Gold (30+), Platinum (40+)
+- "GET READY" countdown, progressive pipe speed, camera follow, bloom lighting
+- Feather burst on death, sparkles when you score
+
 ---
 
 ## Step-by-step: how to run

@@ -66,6 +66,19 @@ function createPipeSegment(height, isTop) {
   stripe.position.set(-w * 0.35, isTop ? -height / 2 : height / 2, w * 0.44);
   group.add(stripe);
 
+  // Dark inner mouth of pipe
+  const innerDark = new THREE.Mesh(
+    new THREE.CircleGeometry(w * 0.38, 16),
+    new THREE.MeshStandardMaterial({
+      color: 0x2a4a18,
+      roughness: 1,
+      metalness: 0,
+    })
+  );
+  innerDark.rotation.x = -Math.PI / 2;
+  innerDark.position.y = isTop ? -height + 0.02 : height - 0.02;
+  group.add(innerDark);
+
   return group;
 }
 
@@ -182,13 +195,13 @@ export class PipeManager {
   }
 
   checkScore(birdX) {
-    let scored = 0;
+    const events = [];
     for (const pipe of this.pipes) {
       if (!pipe.passed && pipe.x + GAME.pipeWidth < birdX) {
         pipe.passed = true;
-        scored++;
+        events.push({ x: pipe.x, y: pipe.gapCenter, z: 0 });
       }
     }
-    return scored;
+    return events;
   }
 }

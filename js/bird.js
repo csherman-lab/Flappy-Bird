@@ -11,6 +11,9 @@ export class Bird {
     this.rotationZ = 0;
     this.flapTimer = 0;
     this.alive = true;
+    this.blinkTimer = 2 + Math.random() * 3;
+    this.pupil = null;
+    this.onFlap = null;
 
     this._buildModel();
   }
@@ -98,6 +101,7 @@ export class Bird {
     );
     pupil.position.set(0.44, 0.28, 0.2);
     this.group.add(pupil);
+    this.pupil = pupil;
 
     // Cheek highlight (OG white patch)
     const cheek = new THREE.Mesh(
@@ -150,6 +154,9 @@ export class Bird {
   flap() {
     this.velocityY = GAME.flapVelocity;
     this.flapTimer = 0.18;
+    if (this.onFlap) {
+      this.onFlap(this.group.position.x, this.group.position.y, this.group.position.z);
+    }
   }
 
   reset() {
@@ -180,6 +187,18 @@ export class Bird {
     } else {
       this.wing.rotation.x = THREE.MathUtils.lerp(this.wing.rotation.x, 0.15, dt * 6);
       this.wingBack.rotation.x = THREE.MathUtils.lerp(this.wingBack.rotation.x, -0.15, dt * 6);
+    }
+
+    this.blinkTimer -= dt;
+    if (this.pupil) {
+      if (this.blinkTimer <= 0 && this.blinkTimer > -0.12) {
+        this.pupil.scale.y = 0.15;
+      } else if (this.blinkTimer <= -0.12) {
+        this.pupil.scale.y = 1;
+        this.blinkTimer = 2.5 + Math.random() * 4;
+      } else {
+        this.pupil.scale.y = 1;
+      }
     }
   }
 

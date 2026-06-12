@@ -1,5 +1,11 @@
 import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { COLORS } from './colors.js';
+
+const CAMERA_BASE = { x: -2.2, y: 1.6, z: 8.8 };
+const CAMERA_LOOK = { x: -1.2, y: 0.8, z: 0 };
 
 export function createRenderer(canvas) {
   const renderer = new THREE.WebGLRenderer({
@@ -11,16 +17,41 @@ export function createRenderer(canvas) {
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.05;
+  renderer.toneMappingExposure = 1.08;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   return renderer;
 }
 
+export function createComposer(renderer, scene, camera) {
+  const composer = new EffectComposer(renderer);
+  composer.addPass(new RenderPass(scene, camera));
+
+  const bloom = new UnrealBloomPass(
+    new THREE.Vector2(window.innerWidth, window.innerHeight),
+    0.22,
+    0.35,
+    0.92
+  );
+  composer.addPass(bloom);
+  composer.bloomPass = bloom;
+  return composer;
+}
+
 export function createCamera() {
   const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 200);
-  camera.position.set(-2.2, 1.6, 8.8);
-  camera.lookAt(-1.2, 0.8, 0);
+  camera.position.set(CAMERA_BASE.x, CAMERA_BASE.y, CAMERA_BASE.z);
+  camera.lookAt(CAMERA_LOOK.x, CAMERA_LOOK.y, CAMERA_LOOK.z);
   return camera;
+}
+
+export function resetCamera(camera, birdY = 0.8, shakeX = 0, shakeY = 0) {
+  const followY = THREE.MathUtils.lerp(CAMERA_BASE.y, CAMERA_BASE.y + birdY * 0.18, 0.35);
+  camera.position.set(
+    CAMERA_BASE.x + shakeX,
+    followY + shakeY,
+    CAMERA_BASE.z
+  );
+  camera.lookAt(CAMERA_LOOK.x, CAMERA_LOOK.y + birdY * 0.12, CAMERA_LOOK.z);
 }
 
 export function createLights(scene) {
@@ -57,10 +88,16 @@ export function createScene() {
   return scene;
 }
 
-export function resizeRenderer(renderer, camera) {
+export function resizeRenderer(renderer, camera, composer) {
   const w = window.innerWidth;
   const h = window.innerHeight;
   renderer.setSize(w, h, false);
   camera.aspect = w / h;
   camera.updateProjectionMatrix();
+  if (composer) {
+    composer.setSize(w, h);
+    if (composer.bloomPass) {
+      composer.bloomPass.resolution.set(w, h);
+    }
+  }
 }
