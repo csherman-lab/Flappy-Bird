@@ -1,0 +1,36 @@
+/** Original Flappy Bird palette — faithful to the 2013 mobile game */
+export const COLORS = {
+  sky: 0x4ec0ca,
+  skyTop: 0x5fd4de,
+  skyBottom: 0x3aa8b2,
+  grass: 0x73bf2e,
+  grassDark: 0x5a9624,
+  dirt: 0xded895,
+  dirtDark: 0xc4b87a,
+  pipe: 0x73bf2e,
+  pipeDark: 0x5a9624,
+  pipeRim: 0x8ed63f,
+  pipeHighlight: 0x9ee84a,
+  birdBody: 0xf7dc16,
+  birdBelly: 0xf9e85a,
+  birdWing: 0xffffff,
+  birdBeak: 0xe8982d,
+  birdEye: 0xffffff,
+  birdPupil: 0x1a1a1a,
+  cloud: 0xffffff,
+  building: 0x6eb8c4,
+  buildingDark: 0x4a9aaa,
+  fog: 0x4ec0ca,
+};
+
+export const GAME = {
+  gravity: -22,
+  flapVelocity: 9.5,
+  pipeSpeed: 5.2,
+  pipeGap: 3.4,
+  pipeSpacing: 9.5,
+  pipeWidth: 1.35,
+  groundY: -4.2,
+  birdX: -1.8,
+  birdRadius: 0.42,
+};
