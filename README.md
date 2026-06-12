@@ -93,3 +93,4 @@ Do **not** double-click `index.html`. That will not work.
 
 - **Click / Tap** — flap
 - **Space / Up Arrow** — flap
+- **M** — toggle sound
