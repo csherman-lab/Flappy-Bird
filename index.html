@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Flappy Bird 3D</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="file-warning" hidden>
+    <h1>Flappy Bird 3D — setup required</h1>
+    <p>This game cannot run by double-clicking the HTML file. You need a local web server.</p>
+    <ol>
+      <li>Open a terminal in this project folder</li>
+      <li>Run: <code>./start.sh</code> or <code>python3 -m http.server 8080</code></li>
+      <li>Open <code>http://localhost:8080</code> in your browser</li>
+    </ol>
+  </div>
+  <div id="app">
+    <canvas id="game-canvas"></canvas>
+
+    <div id="hud">
+      <div id="score">0</div>
+      <div id="best">BEST 0</div>
+    </div>
+
+    <div id="get-ready" class="hidden">GET READY</div>
+
+    <div id="screen-flash"></div>
+
+    <button id="mute-btn" type="button" aria-label="Toggle sound">🔊</button>
+
+    <div id="overlay">
+      <div id="panel">
+        <img id="logo" src="assets/logo.svg" alt="Flappy Bird" />
+        <h1 id="title">FLAPPY BIRD</h1>
+        <p id="subtitle">TAP OR SPACE TO START</p>
+        <div id="gameover" class="hidden">
+          <p class="label">SCORE</p>
+          <p id="final-score">0</p>
+          <div id="medal" class="hidden">
+            <div id="medal-icon"></div>
+            <p id="medal-label">BRONZE</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    if (location.protocol === 'file:') {
+      document.getElementById('file-warning').hidden = false;
+      document.getElementById('app').style.display = 'none';
+    }
+  </script>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
